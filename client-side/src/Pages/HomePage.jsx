@@ -1,10 +1,20 @@
-import { Box, Flex, Heading } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, useDisclosure } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import MyButton from "../components/MyButton";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+} from '@chakra-ui/react'
 import axios from "axios";
 const HomePage = () => {
   const [AllUsers , setAllUsers] = useState([]);
+  const { isOpen, onOpen, onClose } = useDisclosure()
   const fetchUsers = async() => {
      try {
         const response= await axios.get("http://localhost:8080/fetch-users");
@@ -46,16 +56,38 @@ const HomePage = () => {
         textAlign="center"
         textShadow="2px 2px 4px rgba(0, 0, 0, 0.2)"
         mb="4"
+        p={10}
       >
         Home Page
       </Heading>
       <Flex  direction={"row"} justifyContent={"space-evenly"} gap={5} alignItems={"center"}  mt={250}>
         <MyButton text="Fetch Users"   onClick={fetchUsers}></MyButton>
-        <MyButton text="Delete Users"  onClick={DeleteUsers}></MyButton>
+        <MyButton text="Delete Users"  onClick={onOpen}></MyButton>
         <Link to="/users">
           <MyButton text="User Details" /> 
         </Link>
       </Flex>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Confirm Delete</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            All the Data will be deleted from Database 
+          </ModalBody>
+
+          <ModalFooter>
+            <Button colorScheme='blue' mr={3} onClick={onClose}>
+              Close
+            </Button>
+            <Button  colorScheme='red' 
+            onClick={()=> {
+              DeleteUsers()
+              onClose()
+           }} >Confirm Delete</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </Box>
   );
 };

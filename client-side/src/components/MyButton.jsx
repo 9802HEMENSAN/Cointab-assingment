@@ -2,7 +2,7 @@ import { Button } from '@chakra-ui/react'
 import React from 'react'
 
 const MyButton = ({text,onClick}) => {
-    
+
   return (
     <Button
     _hover={{
@@ -17,11 +17,11 @@ const MyButton = ({text,onClick}) => {
       boxShadow: "outline",
     }}
     borderRadius="8px"
-    paddingX="20px"
-    paddingY="10px"
+    paddingX="40px"
+    paddingY="30px"
     fontWeight="bold"
     fontSize="lg"
-    onClick={onClick }
+    onClick={onClick}
   >
     {text}
   </Button>

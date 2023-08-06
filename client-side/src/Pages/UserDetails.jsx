@@ -47,7 +47,7 @@ const UserDetails = () => {
 
   return (
     <Box
-      bgGradient="linear(to-l, green.300, yellow.300)"
+    
       height={"auto"}
       minHeight={"100vh"}
       padding={10}
@@ -131,9 +131,9 @@ const UserDetails = () => {
                 <Box
                 m={25}
                   fontSize={25}
-                  color="white"
+                  color="black"
                 >
-                  No Users Available
+                  No Users Available...
                 </Box>
               </Center>
             )}
